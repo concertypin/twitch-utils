@@ -1,19 +1,21 @@
-import os
 import requests
+import chat
 
 
 def ban(
     maguni_name: str,
     channelname: str,
     token_username: str,
+    auth: chat.auth,
     reason: str = "",
-    token: str = os.environ.get("TWITCH_TOKEN"),
-    client_id: str = os.environ.get("TWITCH_CLIENT_ID"),
+    duration: int = 0,
 ):
     # Make maguni_name ban in channelname's twitch stream.
     # twitch token might be given as environment variable.
     # If not, it will be given as argument.
     # token_username is token owner's username.
+    token = auth.access_token
+    client_id = auth.client_id
 
     if token is None:
         raise TypeError(
@@ -35,3 +37,12 @@ def ban(
 
     r = requests.post(url, params=query_params, headers=headers, data=data)
     return r
+
+
+def get_follow(
+    channelname: str,
+    token: str = os.environ.get("TWITCH_TOKEN"),
+    client_id: str = os.environ.get("TWITCH_CLIENT_ID"),
+):
+    # todo 미완성
+    pass
