@@ -3,8 +3,8 @@ from setuptools import setup
 setup(
     name="twitch_utils",
     version="0.0.0.1",
-    packages=["twitch_utills"],
-    long_description=open("README.md").read(),
+    packages=["twitch_utils"],
+    long_description=open("README.md", encoding="utf-8").read(),
     url="",
     license="Apache License 2.0",
     author="myammyam",
