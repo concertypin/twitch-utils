@@ -43,6 +43,7 @@ class Auth:
         }
 
         r = requests.post(url, params=query_params)
+        self.access_token = r.json()["access_token"]
         return r.json()
 
     def validate_token(self) -> dict:

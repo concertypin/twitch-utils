@@ -1,5 +1,6 @@
 import requests
 import chat
+import auth
 
 
 def ban(
@@ -39,10 +40,37 @@ def ban(
     return r
 
 
-def get_follow(
-    channelname: str,
-    token: str = os.environ.get("TWITCH_TOKEN"),
-    client_id: str = os.environ.get("TWITCH_CLIENT_ID"),
-):
-    # todo 미완성
-    pass
+def get_follow(channelname: str, auth: auth.Auth):
+    # Return list of user's followers.
+    # channelname is user's channel name.
+    token = auth.access_token
+    client_id = auth.client_id
+
+    url = "https://api.twitch.tv/helix/users/follows"
+    query_params = {"to_id": channelname}
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Client-ID": client_id,
+        "Content-Type": "application/json",
+    }
+
+    r = requests.get(url, params=query_params, headers=headers)
+    return r
+
+
+def nickname_to_uid(nickname: str, auth: auth.Auth):
+    # Return user's uid.
+    # nickname is user's nickname.
+    token = auth.access_token
+    client_id = auth.client_id
+
+    url = "https://api.twitch.tv/helix/users"
+    query_params = {"login": nickname}
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Client-ID": client_id,
+        "Content-Type": "application/json",
+    }
+
+    r = requests.get(url, params=query_params, headers=headers)
+    return r

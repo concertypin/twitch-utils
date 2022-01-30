@@ -6,7 +6,8 @@
   </a>
 </p>
 
-> twitch utils for me
+> Twitch utils for me.
+It will be committed when I need it(or when there's an issue).
 
 ## Author
 
